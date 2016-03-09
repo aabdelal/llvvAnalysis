@@ -309,7 +309,7 @@ int main(int argc, char* argv[])
 
     mon.addHistogram( new TH1F( "jet_pt_raw", ";all jet #it{p}_{T}^{j};Events", 50,0,500) );
     mon.addHistogram( new TH1F( "jet_eta_raw",";all jet #eta^{j};Events", 50,-2.6,2.6) );
-
+    mon.addHistogram( new TH2F( "mtvsmet_raw",";E_{T}^{miss} [GeV];#it{m}_{T} [GeV]",750,0,1500, 750,0,1500) );
 
     TH1F *h1 = (TH1F*) mon.addHistogram( new TH1F( "nleptons_raw", ";Lepton multiplicity;Events", 3,2,5) );
     for(int ibin=1; ibin<=h1->GetXaxis()->GetNbins(); ibin++) {
@@ -352,7 +352,7 @@ int main(int argc, char* argv[])
     mon.addHistogram( new TH1F( "mt_presel",         ";#it{m}_{T} [GeV];Events", 12,0,1200) );
     mon.addHistogram( new TH1F( "mt2_presel",         ";#it{m}_{T} [GeV];Events", nBinsMT,MTBins) );
     mon.addHistogram( new TH1F( "axialpfmet_presel", ";Axial E_{T}^{miss} [GeV];Events", 50,-150,150) );
-
+    mon.addHistogram( new TH2F( "mtvsmet_presel",";E_{T}^{miss} [GeV];#it{m}_{T} [GeV]",750,0,1500, 750,0,1500) );
     //adding N-1 plots
 
 
@@ -399,9 +399,7 @@ int main(int argc, char* argv[])
     mon.addHistogram( new TH1F( "mt_final120",             ";#it{m}_{T} [GeV];Events", 12,0,1200) );
     mon.addHistogram( new TH1F( "pfmet_final",      ";E_{T}^{miss} [GeV];Events / 1 GeV", nBinsMET, METBins));
     mon.addHistogram( new TH1F( "pfmet2_final",     ";E_{T}^{miss} [GeV];Events / 1 GeV", nBinsMET2, METBins2));
-
-
-
+    mon.addHistogram( new TH2F( "mtvsmet_final",";E_{T}^{miss} [GeV];#it{m}_{T} [GeV]",750,0,1500, 750,0,1500) );
 
     //#################################################
     //############# CONTROL PLOTS #####################
@@ -1201,12 +1199,13 @@ int main(int argc, char* argv[])
             mon.fillHisto("mt_raw"                          ,tags, MT_massless, weight);
             mon.fillHisto("mt2_raw"                          ,tags, MT_massless, weight,true);
         }
+
         mon.fillHisto("zmass_raw"                       ,tags, zll.mass(), weight);
         mon.fillHisto("njets_raw"                       ,tags, nJetsGood30, weight);
         mon.fillHisto("nbjets_raw"                      ,tags, nCSVLtags, weight);
         if(lep1.pt()>lep2.pt()) mon.fillHisto("ptlep1vs2_raw"                   ,tags, lep1.pt(), lep2.pt(), weight);
         else 			mon.fillHisto("ptlep1vs2_raw"                   ,tags, lep2.pt(), lep1.pt(), weight);
-
+        mon.fillHisto("mtvsmet_raw", tags, metP4.pt(), MT_massless, weight );
 
         // WW/ttbar/Wt/tautau control
         mon.fillHisto("zpt_wwctrl_raw"                      ,tags, zll.pt(),   weight);
@@ -1260,7 +1259,7 @@ int main(int argc, char* argv[])
 
 
         }
-
+		
         //##############################################
         //########  Main Event Selection        ########
         //##############################################
@@ -1302,6 +1301,8 @@ int main(int argc, char* argv[])
                             mon.fillHisto("pfmet2_presel",tags, metP4.pt(), weight, true);
                             mon.fillHisto("mt_presel",   tags, MT_massless, weight);
                             mon.fillHisto("mt2_presel",   tags, MT_massless, weight, true);
+                            mon.fillHisto("mtvsmet_presel", tags, metP4.pt(), MT_massless, weight );
+
                         }
 
                         mon.fillHisto("dphiZMET_presel",tags, dphiZMET, weight);
@@ -1328,6 +1329,7 @@ int main(int argc, char* argv[])
                                     mon.fillHisto("mt_final",   tags, MT_massless, weight);
                                     mon.fillHisto("pfmet_final",tags, metP4.pt(), weight, true);
                                     mon.fillHisto("pfmet2_final",tags, metP4.pt(), weight, true);
+                                    mon.fillHisto("mtvsmet_final", tags, metP4.pt(), MT_massless, weight );
 
                                     if(passMETcut120) mon.fillHisto("mt_final120",   tags, MT_massless, weight);
 
