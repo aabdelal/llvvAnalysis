@@ -37,17 +37,25 @@ class WIMPReweighting {
 
 public:
 
+    WIMPReweighting() {};
     WIMPReweighting(const edm::ParameterSet &runProcess);
+    WIMPReweighting(const edm::ParameterSet &runProcess, TString &url);
+    void Init(const edm::ParameterSet &runProcess);
+    bool Init(const edm::ParameterSet &runProcess,  TString &url);
     double get1DWeights(double xval, TString key);
     double get2DWeights(double xval, double yval, TString key);
-
+    bool selectReferenceWIMPurl(TString &url); 
+    std::pair<float, float> extractMassesFromUrl(TString url); 
+    TString exctractDistrNameFromUrl(TString url);
+    
     ~WIMPReweighting();
 
 private:
     std::map<TString, TH1F *> wimpWeights1DH_;
     std::map<TString, TH2F *> wimpWeights2DH_;
 
-
+    std::vector<std::string> refPoints_;
+    bool allowReweightWithSameMasses_;
 
 
 

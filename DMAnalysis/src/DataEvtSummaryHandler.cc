@@ -87,9 +87,11 @@ bool DataEvtSummaryHandler::initTree(TTree *t)
     t_->Branch("mn_type",               evSummary_.mn_type,                 "mn_type[mn]/I");
     t_->Branch("mn_d0",                 evSummary_.mn_d0,                   "mn_d0[mn]/F");
     t_->Branch("mn_dZ",                 evSummary_.mn_dZ,                   "mn_dZ[mn]/F");
+    t_->Branch("mn_tkLayers",           evSummary_.mn_tkLayers,             "mn_tkLayers[mn]/I");
     t_->Branch("mn_ip3d",               evSummary_.mn_ip3d,                 "mn_ip3d[mn]/F");
     t_->Branch("mn_ip3dsig",            evSummary_.mn_ip3dsig,              "mn_ip3dsig[mn]/F");
     t_->Branch("mn_IsLoose",            evSummary_.mn_IsLoose,              "mn_IsLoose[mn]/O");
+    t_->Branch("mn_IsMedium",           evSummary_.mn_IsMedium,             "mn_IsMedium[mn]/O");
     t_->Branch("mn_IsMedium",            evSummary_.mn_IsMedium,              "mn_IsMedium[mn]/O");
     t_->Branch("mn_IsTight",            evSummary_.mn_IsTight,              "mn_IsTight[mn]/O");
     t_->Branch("mn_IsSoft",            	evSummary_.mn_IsSoft,               "mn_IsSoft[mn]/O");
@@ -119,6 +121,9 @@ bool DataEvtSummaryHandler::initTree(TTree *t)
     t_->Branch("en_pz",                 evSummary_.en_pz,                   "en_pz[en]/F");
     t_->Branch("en_en",                 evSummary_.en_en,                   "en_en[en]/F");
     t_->Branch("en_id",                 evSummary_.en_id,                   "en_id[en]/I");
+    t_->Branch("en_EtaSC",              evSummary_.en_EtaSC,                "en_EtaSC[en]/F");
+    t_->Branch("en_R9",                 evSummary_.en_R9,                   "en_R9[en]/F");
+    t_->Branch("en_R9",                 evSummary_.en_R9,                   "en_R9[en]/F");
 /*
     t_->Branch("en_d0",                 evSummary_.en_d0,                   "en_d0[en]/F");
     t_->Branch("en_dZ",                 evSummary_.en_dZ,                   "en_dZ[en]/F");
@@ -364,9 +369,11 @@ bool DataEvtSummaryHandler::attachToTree(TTree *t)
     t_->SetBranchAddress("mn_type",                 evSummary_.mn_type);
     t_->SetBranchAddress("mn_d0",                   evSummary_.mn_d0);
     t_->SetBranchAddress("mn_dZ",                   evSummary_.mn_dZ);
+    t_->SetBranchAddress("mn_tkLayers",             evSummary_.mn_tkLayers);
     t_->SetBranchAddress("mn_ip3d",                 evSummary_.mn_ip3d);
     t_->SetBranchAddress("mn_ip3dsig",              evSummary_.mn_ip3dsig);
     t_->SetBranchAddress("mn_IsLoose",              evSummary_.mn_IsLoose);
+    t_->SetBranchAddress("mn_IsMedium",             evSummary_.mn_IsMedium);
     t_->SetBranchAddress("mn_IsMedium",              evSummary_.mn_IsMedium);
     t_->SetBranchAddress("mn_IsTight",              evSummary_.mn_IsTight);
     t_->SetBranchAddress("mn_IsSoft",               evSummary_.mn_IsSoft);
@@ -396,6 +403,8 @@ bool DataEvtSummaryHandler::attachToTree(TTree *t)
     t_->SetBranchAddress("en_pz",                   evSummary_.en_pz);
     t_->SetBranchAddress("en_en",                   evSummary_.en_en);
     t_->SetBranchAddress("en_id",                   evSummary_.en_id);
+    t_->SetBranchAddress("en_EtaSC",                evSummary_.en_EtaSC);
+    t_->SetBranchAddress("en_R9",                   evSummary_.en_R9);
 /*
     t_->SetBranchAddress("en_d0",                   evSummary_.en_d0);
     t_->SetBranchAddress("en_dZ",                   evSummary_.en_dZ);

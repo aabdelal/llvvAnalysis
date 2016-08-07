@@ -36,6 +36,8 @@ PhysicsEvent_t getPhysicsEventFrom(DataEvtSummary_t &ev)
                                                 ev.ta_IsLooseIso[i], ev.ta_IsMediumIso[i], ev.ta_IsTightIso[i], ev.ta_combIsoDBeta3Hits[i]
                                                );
             phys.leptons[nlep].setLeptonIPInfo(ev.mn_d0[i], ev.mn_dZ[i], ev.mn_ip3d[i]);
+            phys.leptons[nlep].setLeptonTrackInfo(ev.mn_tkLayers[i]);
+            phys.leptons[nlep].setSCInfo(ev.en_EtaSC[i], ev.en_R9[i]);
             nlep++;
         }
     }
@@ -53,8 +55,10 @@ PhysicsEvent_t getPhysicsEventFrom(DataEvtSummary_t &ev)
                                                 ev.ta_IsLooseIso[i], ev.ta_IsMediumIso[i], ev.ta_IsTightIso[i], ev.ta_combIsoDBeta3Hits[i]
                                                );
             phys.leptons[nlep].setLeptonIPInfo(ev.mn_d0[i], ev.mn_dZ[i], ev.mn_ip3d[i]);
-
-
+            phys.leptons[nlep].setLeptonTrackInfo(ev.mn_tkLayers[i]);
+            phys.leptons[nlep].setSCInfo(ev.en_EtaSC[i], ev.en_R9[i]);
+            
+            
             nlep++;
         }
     }
@@ -73,6 +77,8 @@ PhysicsEvent_t getPhysicsEventFrom(DataEvtSummary_t &ev)
                                                 ev.ta_IsLooseIso[i], ev.ta_IsMediumIso[i], ev.ta_IsTightIso[i], ev.ta_combIsoDBeta3Hits[i]
                                                );
             phys.leptons[nlep].setLeptonIPInfo(ev.mn_d0[i], ev.mn_dZ[i], ev.mn_ip3d[i]);
+            phys.leptons[nlep].setLeptonTrackInfo(ev.mn_tkLayers[i]);
+            phys.leptons[nlep].setSCInfo(ev.en_EtaSC[i], ev.en_R9[i]);
 
             nlep++;
         }

@@ -152,7 +152,7 @@ for proc in procList :
 		#print eventsFile
                 #if(eventsFile.find('/store/')==0)  : eventsFile = commands.getstatusoutput('/afs/cern.ch/project/eos/installation/0.3.84-aquamarine/bin/eos.select find ' + eventsFile)[1]
 		#if(eventsFile.find('?')>=0)  : eventsFile = eventsFile[:eventsFile.find('?')]
-		eventsFile = 'root://eoscms//eos/cms'+eventsFile
+		eventsFile = 'file:/lustre/cms/store'+eventsFile
 
             	sedcmd = 'sed \"s%@input%' + eventsFile +'%;s%@outdir%' + outdir +'%;s%@isMC%' + str(not isdata) + '%;s%@mctruthmode%'+str(mctruthmode)+'%;s%@xsec%'+str(xsec)+'%;'
                 sedcmd += 's%@cprime%'+str(getByLabel(d,'cprime',-1))+'%;'
@@ -161,6 +161,12 @@ for proc in procList :
 		sedcmd += 's%@tag%' +str(getByLabel(desc,'tag',-1))+'%;'#RJ
 		sedcmd += 's%@genwimpweights%' +str(getByLabel(d,'genwimpweights',-1))+'%;'#RJ
 		sedcmd += 's%@doWIMPreweighting%' + str(doWIMPreweighting)+'%;'#RJ
+                if(origdtag.find('TeV_DM_V_')>=0): 
+                    sedcmd += 's%@referencepoints%refVPoints%;'
+                elif(origdtag.find('TeV_DM_A_')>=0): 
+                    sedcmd += 's%@referencepoints%refAPoints%;'
+                else: 
+                     sedcmd += 's%@referencepoints%cms.vstring()%;'					
             	if(params.find('@useMVA')<0) :          params = '@useMVA=False ' + params
                 if(params.find('@weightsFile')<0) :     params = '@weightsFile= ' + params
                 if(params.find('@evStart')<0) :         params = '@evStart=0 ' + params
